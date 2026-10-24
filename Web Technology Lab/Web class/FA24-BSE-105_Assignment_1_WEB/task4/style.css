@@ -1,0 +1,233 @@
+/* ===== Reset some default browser styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* ===== Container that holds the 3 cards ===== */
+.container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;          /* cards go under each other on small screens */
+    justify-content: center;
+}
+
+/* ===== Common card style ===== */
+.card {
+    width: 240px;
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 10px;
+    padding: 24px 16px 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Pro card has a soft shadow */
+.card-pro {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Enterprise card is blue */
+.card-blue {
+    background-color: #1d68f5;
+    border: none;
+    color: #ffffff;
+}
+
+/* ===== Top part: icon + plan name ===== */
+.card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.plan-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #222222;
+}
+
+.card-blue .plan-name {
+    color: #ffffff;
+}
+
+/* ===== Icons ===== */
+.icon {
+    width: 28px;
+    height: 28px;
+}
+
+/* Free: circle inside a circle */
+.icon-circle {
+    border: 2px solid #4a7cf7;
+    border-radius: 50%;
+    position: relative;
+}
+
+.icon-circle::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ec4c8a;
+    border-radius: 50%;
+}
+
+/* Pro: square inside a square */
+.icon-square {
+    border: 2px solid #4a7cf7;
+    border-radius: 3px;
+    position: relative;
+}
+
+.icon-square::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #ec4c8a;
+    border-radius: 2px;
+}
+
+/* Enterprise: hexagon symbol */
+.icon-hexagon {
+    font-size: 30px;
+    line-height: 28px;
+    text-align: center;
+    color: #ffffff;
+}
+
+/* ===== "Best Value" badge ===== */
+.badge {
+    margin-left: auto;        /* pushes badge to the right */
+    background-color: #fbb829;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 7px 12px;
+    border-radius: 20px;
+}
+
+/* ===== Description text ===== */
+.description {
+    font-size: 11px;
+    line-height: 1.6;
+    color: #888888;
+    margin-bottom: 24px;
+}
+
+.card-blue .description {
+    color: #dce6ff;
+}
+
+/* ===== Price ===== */
+.price {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 26px;
+}
+
+.price span {
+    font-size: 11px;
+    font-weight: 400;
+    color: #777777;
+}
+
+.card-blue .price {
+    color: #ffffff;
+}
+
+/* ===== Features list ===== */
+.features {
+    list-style: none;
+    margin-bottom: 30px;
+    flex-grow: 1;             /* keeps buttons at the bottom */
+}
+
+.features li {
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 26px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.features .mark {
+    font-size: 13px;
+    width: 14px;
+}
+
+/* Included feature (check) */
+.features .yes {
+    color: #222222;
+}
+
+.features .yes .mark {
+    color: #ec4c6c;
+}
+
+/* Not included feature (cross) */
+.features .no {
+    color: #b5b5c3;
+    font-weight: 400;
+}
+
+.features .no .mark {
+    color: #b5b5c3;
+}
+
+/* Blue card: everything white */
+.card-blue .features .yes,
+.card-blue .features .yes .mark {
+    color: #ffffff;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 13px;
+    border-radius: 4px;
+}
+
+.btn-light {
+    background-color: #fdebf1;
+    color: #ec4c8a;
+}
+
+.btn-pink {
+    background-color: #ec4c8a;
+    color: #ffffff;
+}
+
+.btn-white {
+    background-color: #ffffff;
+    color: #ec4c8a;
+}
+
+/* Small hover effect */
+.btn:hover {
+    opacity: 0.85;
+}

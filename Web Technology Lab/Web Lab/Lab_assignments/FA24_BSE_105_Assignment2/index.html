@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Expense Tracker</title>
+  <!-- empty icon so the browser does not ask for favicon.ico (avoids a 404 in the console) -->
+  <link rel="icon" href="data:,">
+
+  <!-- CSS framework: I used Bootstrap 5 (CDN) for the Add Expense form layout
+       (row / col-md-* grid, form-control, form-select, form-label). Everything else uses my own CSS. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- my own stylesheet comes after Bootstrap so my rules win -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="navbar-main" aria-label="Main navigation">
+      <a href="#top" class="brand" id="top">Expense<span>Tracker</span></a>
+      <ul class="nav-links">
+        <li><a href="#add-expense">Add Expense</a></li>
+        <li><a href="#my-expenses">My Expenses</a></li>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">JS Docs &#8599;</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container-main">
+
+    <!-- shown only if the JSON files fail to load -->
+    <p id="load-message" class="load-message" role="status" hidden></p>
+
+    <!-- ===== Add Expense ===== -->
+    <section id="add-expense" class="card-box">
+      <h2>Add Expense</h2>
+
+      <form id="expense-form" novalidate>
+        <fieldset>
+          <legend>Expense details</legend>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" id="title" name="title" class="form-control" placeholder="e.g. Lunch at cafe" aria-describedby="title-error">
+              <p class="error-msg" id="title-error"></p>
+            </div>
+
+            <div class="col-md-6">
+              <label for="amount" class="form-label">Amount</label>
+              <input type="number" id="amount" name="amount" class="form-control" min="0" step="0.01" placeholder="e.g. 850" aria-describedby="amount-error">
+              <p class="error-msg" id="amount-error"></p>
+            </div>
+
+            <div class="col-md-6">
+              <label for="date" class="form-label">Date</label>
+              <input type="date" id="date" name="date" class="form-control" aria-describedby="date-error">
+              <p class="error-msg" id="date-error"></p>
+            </div>
+
+            <div class="col-md-6">
+              <label for="category" class="form-label">Category</label>
+              <select id="category" name="category" class="form-select" aria-describedby="category-error">
+                <option value="">-- Select category --</option>
+              </select>
+              <p class="error-msg" id="category-error"></p>
+            </div>
+
+            <div class="col-12">
+              <label for="note" class="form-label">Note (optional)</label>
+              <textarea id="note" name="note" class="form-control" rows="2" maxlength="200" placeholder="Any extra detail"></textarea>
+            </div>
+          </div>
+
+          <div class="form-buttons">
+            <button type="submit" class="btn-main">Add Expense</button>
+            <button type="reset" class="btn-light">Reset</button>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+
+    <!-- ===== My Expenses ===== -->
+    <section id="my-expenses" class="card-box">
+      <h2>My Expenses</h2>
+
+      <div class="filters">
+        <div class="filter-item">
+          <label for="filter-category">Category</label>
+          <select id="filter-category">
+            <option value="all">All categories</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label for="search">Search title</label>
+          <input type="search" id="search" placeholder="Type to search...">
+        </div>
+        <div class="filter-item">
+          <label for="sort">Sort by amount</label>
+          <select id="sort">
+            <option value="none">No sorting</option>
+            <option value="asc">Low to high</option>
+            <option value="desc">High to low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="expense-table">
+          <thead>
+            <tr>
+              <th colspan="5" class="table-caption">My Expenses</th>
+            </tr>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Title</th>
+              <th scope="col">Category</th>
+              <th scope="col" class="num">Amount</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody id="expense-body">
+            <!-- rows are created in app.js -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="3" scope="row">Total (shown rows)</th>
+              <td id="table-total" class="num">0</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== Summary ===== -->
+    <section id="summary" class="card-box">
+      <h2>Summary</h2>
+
+      <p id="budget-message" class="budget-message" role="status"></p>
+
+      <div class="summary-grid">
+        <article class="stat-card">
+          <h3>Total spent</h3>
+          <p id="stat-total" class="stat-value">0</p>
+        </article>
+        <article class="stat-card">
+          <h3>Average expense</h3>
+          <p id="stat-average" class="stat-value">0</p>
+        </article>
+        <article class="stat-card">
+          <h3>Highest expense</h3>
+          <p id="stat-highest" class="stat-value">0</p>
+        </article>
+        <article class="stat-card">
+          <h3>Number of expenses</h3>
+          <p id="stat-count" class="stat-value">0</p>
+        </article>
+      </div>
+
+      <h3 class="sub-heading">Expenses per category</h3>
+      <ul id="category-counts" class="category-counts"></ul>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <time datetime="2026">2026</time> Mini Expense Tracker &middot; FA24-BSE-105 &middot; CSC336 Web Technologies</p>
+  </footer>
+
+  <!-- app.js is an ES module, it imports data.js and utils.js -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

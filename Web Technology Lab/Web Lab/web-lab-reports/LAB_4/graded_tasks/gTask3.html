@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Card</title>
+
+    <style>
+            * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: lightgray;
+        font-family: Arial;
+    }
+
+    .product-card {
+        width: 350px;
+        margin: 50px auto;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px gray;
+        overflow: hidden;
+    }
+
+    .image-box {
+        position: relative;
+    }
+
+    .image-box img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
+
+    .sale-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .product-info {
+        padding: 20px;
+    }
+
+        .category {
+            color: gray;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .description {
+            line-height: 1.5;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .price span {
+            font-size: 16px;
+            color: gray;
+            text-decoration: line-through;
+        }
+
+        .stock {
+            color: green;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cart-button {
+            background-color: black;
+                color: white;
+            }
+
+        .wishlist-button {
+            background-color: lightgray;
+            color: black;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="product-card">
+
+        <div class="image-box">
+
+            <img src="https://via.placeholder.com/500x300"
+                 alt="Product Image">
+
+            <span class="sale-badge">SALE</span>
+
+        </div>
+
+        <div class="product-info">
+
+            <p class="category">Shoes</p>
+
+            <h1>Running Shoes</h1>
+
+            <p class="description">
+                Comfortable shoes for running and everyday use.
+            </p>
+
+            <p class="price">
+                $40
+                <span>$60</span>
+            </p>
+
+            <p class="stock">In Stock</p>
+
+            <button class="cart-button">Add to Cart</button>
+
+            <button class="wishlist-button">♡ Wishlist</button>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
